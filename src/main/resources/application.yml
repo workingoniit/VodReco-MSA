@@ -13,7 +13,7 @@ spring:
         access-key: ${AWS_ACCESSKEY}
         secret-key: ${AWS_SECRETKEY}
 
-  application:
-    amazon:
-      sqs:
-        queue-name: UserActivityQueue.fifo
+application:
+  amazon:
+    sqs:
+      queue-name: UserActivityQueue.fifo
