@@ -1,0 +1,19 @@
+spring:
+  data:
+    mongodb:
+      uri: ${DB_URI}
+
+  cloud:
+    aws:
+      stack:
+        auto: false
+      region:
+        static: ap-northeast-2
+      credentials:
+        access-key: ${AWS_ACCESSKEY}
+        secret-key: ${AWS_SECRETKEY}
+
+  application:
+    amazon:
+      sqs:
+        queue-name: UserActivityQueue.fifo
