@@ -1,0 +1,1 @@
+DB_URI = "mongodb://lv3_user_mongo:sufferFromYou333@ec2-3-38-214-231.ap-northeast-2.compute.amazonaws.com:27017/MainPage?authSource=admin"
