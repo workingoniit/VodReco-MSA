@@ -1,6 +1,6 @@
-package service.mainPage.viewPopularVods;
+package com.main.MainPage.service.mainPage.viewPopularVods;
 
-import com.example.VodReco.dto.popular.ViewPopularVodsDto;
+import com.main.MainPage.dto.ViewPopularVodsDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

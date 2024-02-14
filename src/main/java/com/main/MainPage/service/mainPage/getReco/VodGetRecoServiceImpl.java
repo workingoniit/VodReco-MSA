@@ -1,14 +1,14 @@
-package service.mainPage.getReco;
+package com.main.MainPage.service.mainPage.getReco;
 
-import com.example.VodReco.domain.Rec.DescriptionResult;
-import com.example.VodReco.domain.Rec.MoodResult;
-import com.example.VodReco.domain.Rec.PersonalResult;
-import com.example.VodReco.dto.Recommendation.client.MainResponseDto;
-import com.example.VodReco.mongoRepository.DescriptionResultRepository;
-import com.example.VodReco.mongoRepository.MoodResultRepository;
-import com.example.VodReco.mongoRepository.PersonalResultRepository;
-import com.example.VodReco.util.StringToListWrapper;
-import com.example.VodReco.util.forRecommendation.SetDataToSendToClient;
+import com.main.MainPage.domain.Rec.DescriptionResult;
+import com.main.MainPage.domain.Rec.MoodResult;
+import com.main.MainPage.domain.Rec.PersonalResult;
+import com.main.MainPage.dto.Recommendation.client.MainResponseDto;
+import com.main.MainPage.mongoRepository.DescriptionResultRepository;
+import com.main.MainPage.mongoRepository.MoodResultRepository;
+import com.main.MainPage.mongoRepository.PersonalResultRepository;
+import com.main.MainPage.util.StringToListWrapper;
+import com.main.MainPage.util.forRecommendation.SetDataToSendToClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

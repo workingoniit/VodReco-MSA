@@ -1,6 +1,6 @@
-package service.mainPage.getReco;
+package com.main.MainPage.service.mainPage.getReco;
 
-import com.example.VodReco.dto.Recommendation.client.MainResponseDto;
+import com.main.MainPage.dto.Recommendation.client.MainResponseDto;
 import org.springframework.stereotype.Service;
 
 @Service
