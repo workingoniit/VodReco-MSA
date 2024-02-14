@@ -1,33 +1,33 @@
-//package com.detail.UserActivityEventListener.service.updateMyWish;
-//
-//import com.example.VodReco.dto.wish.UpdateMyWishDto;
-//import com.example.VodReco.dto.wish.UpdateMyWishRequestDto;
-//import com.example.VodReco.mongoRepository.UserWishViewRepository;
-//import com.example.VodReco.mongoRepository.VodRepository;
-//import com.example.VodReco.repository.UserWishRepository;
-//import com.example.VodReco.util.userWish.FromUpdateMyWishDtoToUserWishViewWrapper;
-//import com.example.VodReco.util.userWish.FromUpdateMyWishDtoToUserWishWrapper;
-//import lombok.RequiredArgsConstructor;
-//import org.springframework.stereotype.Service;
-//import org.springframework.transaction.annotation.Transactional;
-//
-//@Service
-//@RequiredArgsConstructor
-//@Transactional
-//public class UserWishUpdateMyWishServiceImpl implements UserWishUpdateMyWishService{
-//    private final UserWishRepository userWishRepository;
-//    private final UserWishViewRepository userWishViewRepository;
-//    private final VodRepository vodRepository;
-//    private final FromUpdateMyWishDtoToUserWishWrapper toUserWishWrapper;
-//    private final FromUpdateMyWishDtoToUserWishViewWrapper toUserWishViewWrapper;
-//    @Override
-//    @Transactional
-//    public void saveWish(UpdateMyWishRequestDto updateMyWishRequestDto, String contentId) {
-//        String uniqueId = updateMyWishRequestDto.getSubsr() + contentId;
-//        UpdateMyWishDto updateMyWishDto = UpdateMyWishDto.builder().uniqueId(uniqueId).subsr(updateMyWishRequestDto.getSubsr())
-//                .contentId(contentId).wish(updateMyWishRequestDto.getWish()).title(vodRepository.findByContentId(contentId).getTitle()).
-//                posterurl(vodRepository.findByContentId(contentId).getPosterurl()).build();
-//        userWishRepository.save(toUserWishWrapper.toUserWish(updateMyWishDto));
-//        userWishViewRepository.save(toUserWishViewWrapper.toUserWishView(updateMyWishDto));
-//    }
-//}
+package com.detail.UserActivityEventListener.service.updateMyWish;
+
+import com.detail.UserActivityEventListener.mongoRepository.UserWishRepository;
+import com.detail.UserActivityEventListener.util.FromUpdateMyWishDtoToUserWishWrapper;
+import dto.UpdateMyWishDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class UserWishUpdateMyWishServiceImpl implements UserWishUpdateMyWishService{
+    private final UserWishRepository userWishRepository;
+    private final FromUpdateMyWishDtoToUserWishWrapper toUserWishWrapper;
+    @Override
+    @Transactional
+    public void saveWish(List<String> messageListExceptClassifier) {
+        String uniqueId = messageListExceptClassifier.get(0);
+        String subsr = messageListExceptClassifier.get(1);
+        String contentId = messageListExceptClassifier.get(2);
+        Integer wish = Integer.parseInt(messageListExceptClassifier.get(3));
+        String title = messageListExceptClassifier.get(4);
+        String posterurl = messageListExceptClassifier.get(5);
+
+        UpdateMyWishDto updateMyWishDto = UpdateMyWishDto.builder().uniqueId(uniqueId).subsr(subsr)
+                .contentId(contentId).wish(wish).title(title).
+                posterurl(posterurl).build();
+        userWishRepository.save(toUserWishWrapper.toUserWish(updateMyWishDto));
+    }
+}
