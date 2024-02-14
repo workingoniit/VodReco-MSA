@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @NoArgsConstructor
 public class UserRating {
     @Id
-
+    // @Id 붙이면 내가 지정한 unique_id라는 키값 무시됨. mongoDB에는 _id라는 이름으로 데이터 삽입됨
     @Field(name = "unique_id")
 //    @ColumnDefault("defaultId")
     private String uniqueId;
