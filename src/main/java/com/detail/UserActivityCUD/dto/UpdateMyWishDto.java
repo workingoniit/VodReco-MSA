@@ -13,8 +13,6 @@ public class UpdateMyWishDto {
     private String subsr;
     private String contentId;
     private Integer wish;
-
-    //조회 속도 개선을 위해 추가(231122)
     private String title;
     private String posterurl;
 

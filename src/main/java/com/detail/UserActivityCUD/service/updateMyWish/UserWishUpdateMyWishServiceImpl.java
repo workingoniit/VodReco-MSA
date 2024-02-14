@@ -4,10 +4,16 @@ import com.detail.UserActivityCUD.dto.UpdateMyWishDto;
 import com.detail.UserActivityCUD.dto.UpdateMyWishRequestDto;
 import com.detail.UserActivityCUD.mongoRepository.VodRepository;
 import com.detail.UserActivityCUD.repository.UserWishRepository;
+import com.detail.UserActivityCUD.sqs.AmazonSQSSender;
 import com.detail.UserActivityCUD.util.FromUpdateMyWishDtoToUserWishWrapper;
+import com.detail.UserActivityCUD.util.ListToStringWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +22,9 @@ public class UserWishUpdateMyWishServiceImpl implements UserWishUpdateMyWishServ
     private final UserWishRepository userWishRepository;
     private final VodRepository vodRepository;
     private final FromUpdateMyWishDtoToUserWishWrapper toUserWishWrapper;
+    private final ListToStringWrapper listToStringWrapper;
+    private final AmazonSQSSender amazonSQSSender;
+
     @Override
     @Transactional
     public void saveWish(UpdateMyWishRequestDto updateMyWishRequestDto, String contentId) {
@@ -25,5 +34,18 @@ public class UserWishUpdateMyWishServiceImpl implements UserWishUpdateMyWishServ
                 .contentId(contentId).wish(updateMyWishRequestDto.getWish()).title(vodRepository.findByContentId(contentId).getTitle()).
                 posterurl(vodRepository.findByContentId(contentId).getPosterurl()).build();
         userWishRepository.save(toUserWishWrapper.toUserWish(updateMyWishDto));
+
+        List<String> messageList = new ArrayList<>();
+        messageList.add(uniqueId);
+        messageList.add(updateMyWishDto.getSubsr());
+        messageList.add(updateMyWishDto.getContentId());
+        messageList.add(String.valueOf(updateMyWishDto.getWish()));
+        messageList.add(updateMyWishDto.getTitle());
+        messageList.add(updateMyWishDto.getPosterurl());
+
+        String message = "wish insert or update, " + listToStringWrapper.listToString(messageList);
+
+        //sqs에 메시지 보내기
+        amazonSQSSender.sendMessage(amazonSQSSender.getQueueName(), UUID.randomUUID().toString(), message);
     }
 }
