@@ -3,6 +3,7 @@ package com.detail.UserActivityCUD.controller;
 
 import com.detail.UserActivityCUD.dto.UpdateMyRatingRequestDto;
 import com.detail.UserActivityCUD.dto.UpdateMyWishRequestDto;
+import com.detail.UserActivityCUD.service.insertMyRating.UserRatingInsertMyRatingServiceImpl;
 import com.detail.UserActivityCUD.service.deleteMyRating.UserRatingDeleteMyRatingServiceImpl;
 import com.detail.UserActivityCUD.service.updateMyRating.UserRatingUpdateMyRatingServiceImpl;
 import com.detail.UserActivityCUD.service.updateMyWish.UserWishUpdateMyWishServiceImpl;
@@ -11,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 //vod별 상세페이지
@@ -25,6 +24,7 @@ public class VodDetailController {
     private final UserWishUpdateMyWishServiceImpl userWishUpdateMyWishService;
     private final UserRatingUpdateMyRatingServiceImpl userRatingUpdateMyRatingService;
     private final UserRatingDeleteMyRatingServiceImpl userRatingDeleteMyRatingService;
+    private final UserRatingInsertMyRatingServiceImpl userRatingInsertMyRatingService;
 
 
 
@@ -37,10 +37,6 @@ public class VodDetailController {
     public ResponseEntity<Void> saveMyFirstWish(@PathVariable("content_id")
                                                     String contentId,
                                                     @RequestBody UpdateMyWishRequestDto updateMyWishRequestDto) {
-        //[jjae] - 변경코드
-        //[jjae]- [ 발생가능한 에러 ]
-        //유효성 검사 오류: 클라이언트가 잘못된 데이터를 보낸 경우 (예: 필수 필드 누락, 잘못된 형식 등)
-        //데이터베이스 오류: 데이터 저장 시 데이터베이스 연결이 실패하는 경우, 저장 실패 등
         try {
         userWishUpdateMyWishService.saveWish(updateMyWishRequestDto, contentId);
         return ResponseEntity.ok().build();
@@ -48,8 +44,6 @@ public class VodDetailController {
 //            에러 코드 500
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-
-        //처리 오류: 어떤 이유로 인해 찜을 저장하는 로직이 실패하는 경우
     }
 
     // rating 최초 insert
@@ -59,14 +53,9 @@ public class VodDetailController {
         if (updateMyRatingRequestDto.getRating() == 0 || updateMyRatingRequestDto.getReview().isEmpty()) {
             return ResponseEntity.badRequest().body("Rating cannot be 0 and Review cannot be null.");
         } else {
-            userRatingUpdateMyRatingService.saveRating(contentId, updateMyRatingRequestDto);
+            userRatingInsertMyRatingService.insertRating(contentId, updateMyRatingRequestDto);
             return ResponseEntity.ok().build();
         }
-        // [jjae] - 발생할 수 있는 에러
-        //입력 유효성 검사 오류: 클라이언트가 잘못된 데이터를 전송하는 경우
-        //데이터베이스 저장 오류: 데이터 저장 시 데이터베이스에서 오류가 발생하는 경우
-        //인증 및 권한 오류: 사용자가 권한이 없는 작업을 수행하려고 시도하는 경우 --> 권한이 없을일은,, 로그인하지 않은 사용자인데 이건 불가능한 에러
-
     }
 
     //rating 변경
@@ -78,7 +67,7 @@ public class VodDetailController {
             return ResponseEntity.badRequest().build();
         } else {
             // 유효한 경우에만 변경 로직을 수행하도록 처리
-            userRatingUpdateMyRatingService.saveRating(contentId, updateMyRatingRequestDto);
+            userRatingUpdateMyRatingService.updateRating(contentId, updateMyRatingRequestDto);
             return ResponseEntity.ok().build();
         }
     }
@@ -90,7 +79,6 @@ public class VodDetailController {
     public ResponseEntity<Void> deleteMyRating(@PathVariable("content_id")
                                                    String contentId, @RequestBody UpdateMyRatingRequestDto updateMyRatingRequestDto) {
         System.out.println("삭제된 rating 정보 = " + contentId);
-        //[jjae] - 변경코드
         try {
         userRatingDeleteMyRatingService.deleteRating(contentId, updateMyRatingRequestDto.getSubsr());
         return ResponseEntity.ok().build();

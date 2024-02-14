@@ -1,4 +1,4 @@
-package com.detail.UserActivityCUD.service.updateMyRating;
+package com.detail.UserActivityCUD.service.insertMyRating;
 
 
 import com.detail.UserActivityCUD.dto.UpdateMyRatingDto;
@@ -19,16 +19,15 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class UserRatingUpdateMyRatingServiceImpl implements UserRatingUpdateMyRatingService {
+public class UserRatingInsertMyRatingServiceImpl implements UserRatingInsertMyRatingService {
     private final UserRatingRepository userRatingRepository;
     private final VodRepository vodRepository;
     private final FromUpdateMyRatingDtoToUserRatingWrapper toUserRatingWrapper;
     private final ListToStringWrapper listToStringWrapper;
     private final AmazonSQSSender amazonSQSSender;
 
-
     @Override
-    public void updateRating(String contentId, UpdateMyRatingRequestDto updateMyRatingRequestDto) {
+    public void insertRating(String contentId, UpdateMyRatingRequestDto updateMyRatingRequestDto) {
         String uniqueId = updateMyRatingRequestDto.getSubsr() + contentId;
         UpdateMyRatingDto updateMyRatingDto = UpdateMyRatingDto.builder()
                 .uniqueId(uniqueId)
@@ -51,11 +50,10 @@ public class UserRatingUpdateMyRatingServiceImpl implements UserRatingUpdateMyRa
         messageList.add(updateMyRatingDto.getRating_date());
         messageList.add(updateMyRatingDto.getTitle());
         messageList.add(updateMyRatingDto.getPosterurl());
-        String message = "rating update, " + listToStringWrapper.listToString(messageList);
+        String message = "rating insert, " + listToStringWrapper.listToString(messageList);
 
+    //sqs에 메시지 보내기
         amazonSQSSender.sendMessage(amazonSQSSender.getQueueName(), UUID.randomUUID().toString(), message);
-
-
         //TODO :
 //        updateRating, uniqueId, ... 해서 통으로 보내고
 //                StringtoListWrapper 파쿠리해와서 파싱해가지고 리스트로 만들고 인덱싱하자 ㅎㅎ

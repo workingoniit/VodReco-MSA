@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserRatingUpdateMyRatingService {
 
-    void saveRating(String contentId, UpdateMyRatingRequestDto updateMyRatingRequestDto);
+    void updateRating(String contentId, UpdateMyRatingRequestDto updateMyRatingRequestDto);
 
 }

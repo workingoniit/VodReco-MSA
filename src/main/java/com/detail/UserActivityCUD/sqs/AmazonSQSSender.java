@@ -2,6 +2,7 @@ package com.detail.UserActivityCUD.sqs;
 
 import io.awspring.cloud.sqs.operations.SendResult;
 import io.awspring.cloud.sqs.operations.SqsTemplate;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,7 @@ import software.amazon.awssdk.services.sqs.SqsAsyncClient;
 
 @Component
 @RequiredArgsConstructor
+@Getter
 public class AmazonSQSSender {
 
     private final SqsTemplate template;
