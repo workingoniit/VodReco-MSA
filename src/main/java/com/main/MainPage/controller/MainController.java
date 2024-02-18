@@ -20,15 +20,8 @@ public class MainController {
 
 
     @PostMapping("")
-//    public ResponseEntity<MainResponseDto> getAllRecoFromModel(@RequestBody UserDto userDto) {
     public MainResponseDto getAllRecoFromModel(@RequestBody UserDto userDto) {
-//        if (vodGetRecoService.getAllContentIdsFromModel(userDto.getSubsr()) != null) {
-//            return ResponseEntity.ok(vodGetRecoService.getAllContentIdsFromModel(userDto.getSubsr()));
         return vodGetRecoService.getAllContentIdsFromModel(userDto.getSubsr());
-//        }
-//        //에러코드 204
-//            return ResponseEntity.noContent().build();
-
     }
 
 
