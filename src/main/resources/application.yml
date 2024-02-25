@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      uri: ${DB_URI}
+
+server:
+  tomcat:
+    access-log:
+      enabled: true
+      basedir: .
+      directory: logs
+      suffix: .log
+      prefix: access_log
+      file-date-format: .yyyy-MM-dd
+      pattern: '%{yyyy-MM-dd HH:mm:ss}t %s %r %{User-Agent}i %{Referer}i %a %b'
