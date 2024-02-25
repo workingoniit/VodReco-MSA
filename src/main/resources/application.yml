@@ -19,4 +19,4 @@ application:
       queue-name: UserActivityQueue.fifo
 
 server:
-  port: 8081
+  port: 8082
