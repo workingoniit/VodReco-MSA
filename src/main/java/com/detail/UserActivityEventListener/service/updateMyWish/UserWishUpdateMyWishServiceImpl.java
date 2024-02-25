@@ -2,7 +2,7 @@ package com.detail.UserActivityEventListener.service.updateMyWish;
 
 import com.detail.UserActivityEventListener.mongoRepository.UserWishRepository;
 import com.detail.UserActivityEventListener.util.FromUpdateMyWishDtoToUserWishWrapper;
-import dto.UpdateMyWishDto;
+import com.detail.UserActivityEventListener.dto.UpdateMyWishDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

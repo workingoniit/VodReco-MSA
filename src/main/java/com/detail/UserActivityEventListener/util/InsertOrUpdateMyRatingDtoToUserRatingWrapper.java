@@ -1,7 +1,7 @@
 package com.detail.UserActivityEventListener.util;
 
 import com.detail.UserActivityEventListener.domain.UserRating;
-import dto.InsertOrUpdateMyRatingDto;
+import com.detail.UserActivityEventListener.dto.InsertOrUpdateMyRatingDto;
 import org.springframework.stereotype.Component;
 
 @Component

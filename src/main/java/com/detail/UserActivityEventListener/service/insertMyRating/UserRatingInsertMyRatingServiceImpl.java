@@ -2,7 +2,7 @@ package com.detail.UserActivityEventListener.service.insertMyRating;
 
 import com.detail.UserActivityEventListener.mongoRepository.UserRatingRepository;
 import com.detail.UserActivityEventListener.util.InsertOrUpdateMyRatingDtoToUserRatingWrapper;
-import dto.InsertOrUpdateMyRatingDto;
+import com.detail.UserActivityEventListener.dto.InsertOrUpdateMyRatingDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,7 +1,7 @@
 package com.detail.UserActivityEventListener.util;
 
 import com.detail.UserActivityEventListener.domain.UserWish;
-import dto.UpdateMyWishDto;
+import com.detail.UserActivityEventListener.dto.UpdateMyWishDto;
 import org.springframework.stereotype.Component;
 
 @Component

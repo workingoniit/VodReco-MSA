@@ -1,4 +1,4 @@
-package dto;
+package com.detail.UserActivityEventListener.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
