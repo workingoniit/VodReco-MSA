@@ -1,0 +1,35 @@
+spring:
+  jpa:
+    hibernate:
+      show-sql: true
+      ddl-auto: update
+
+    properties:
+      hibernate:
+        format_sql: true
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PWD}
+
+  data:
+    mongodb:
+      uri: ${DB_URI}
+
+
+  cloud:
+    aws:
+      stack:
+        auto: false
+      region:
+        static: ap-northeast-2
+      credentials:
+        access-key: ${AWS_ACCESSKEY}
+        secret-key: ${AWS_SECRETKEY}
+
+application:
+  amazon:
+    sqs:
+      queue-name: UserActivityQueue.fifo
