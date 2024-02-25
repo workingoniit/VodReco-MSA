@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
 @NoArgsConstructor
-@Document(collection = "user_rating_view")
+@Document(collection = "user_rating")
 public class UserRatingView {
     @Id
     private String uniqueId;

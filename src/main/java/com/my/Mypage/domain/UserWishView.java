@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
-@Document(collection = "user_wish_view")
+@Document(collection = "user_wish")
 public class UserWishView {
     @Id
     @Field(name = "unique_id")
